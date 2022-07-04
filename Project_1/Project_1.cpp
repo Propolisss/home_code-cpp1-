@@ -314,7 +314,7 @@ int main()
 	}
 	auto last = nums.end();
 	std::cout << nums.size() / 2 << ' ' <<  (*(last - 1) + *(last - 2)) / 2 << '\n';*/
-
+	//
 	/*std::vector<int64_t> nums;
 
 
@@ -332,7 +332,57 @@ int main()
 			}
 		} 
 	}*/
+	// (№ 4280) (А. Кабанов) - 27 егэ (не оптимально, но считает быстро)
+	/*int n;
+	std::ifstream file("27b.txt");
+	file >> n;
+	std::vector<uint64_t> nums;
+	size_t summ = 0;
+	for (size_t i = 0; i < n; i++)
+	{
+		uint64_t tmp;
+		file >> tmp;
+		nums.push_back(tmp);
+	}
+	size_t count = 0;
+	size_t len;
+	size_t minn = pow(10, 10);
+	size_t maxx = 0;
+	size_t k = 0;
 
+	for (size_t i = 0; i < n; i++)
+	{
+		if (nums[i] % 39 == 0)
+		{
+			count++;
+		}
+		k++;
+		summ = nums[i];
+		len = 1;
+		for (size_t j = i + 1; j < n; j++)
+		{
+			len++;
+			summ += nums[j];
+			if (summ % 39 == 0)
+			{
+				if (len <= 20)
+				{
+					count++;
+				}
+			}
+			if (len > 20)
+			{
+				break;
+			}
+			if (k == 1000)
+			{
+				std::cout << i << '\n';
+				k = 0;
+			}
+		}
+	}
+
+	std::cout << count << '\n';*/
 
 
 	return 0;
