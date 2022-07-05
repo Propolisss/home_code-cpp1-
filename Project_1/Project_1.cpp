@@ -82,6 +82,104 @@ bool palindrom_str(std::string word)
 }
 
 
+// leetcode ------------------------------
+
+
+// 1. Two Sum
+class Solution1
+{
+public:
+	std::vector<int> twoSum(std::vector<int>& nums, int target)
+	{
+		std::vector<int> ans;
+		for (size_t i = 0; i < nums.size(); i++)
+		{
+			for (size_t j = i + 1; j < nums.size(); j++)
+			{
+				if (nums[i] + nums[j] == target)
+				{
+					ans.push_back(i);
+					ans.push_back(j);
+					return ans;
+				}
+			}
+		}
+		return ans;
+	}
+};
+// 1
+
+
+
+// 9. Palindrome Number
+class Solution9
+{
+public:
+	bool isPalindrome(int x) 
+	{
+		if (x < 0)
+		{
+			return false;
+		}
+
+		size_t temp = x;
+		size_t b = 0;
+
+		while (temp != 0)
+		{
+			b = b * 10 + temp % 10;
+			temp /= 10;
+		}
+
+		if (x == b)
+		{
+			return true;
+		}
+
+		return false;
+	}
+};
+// 9
+
+
+
+//14. Longest Common Prefix
+class Solution14
+{
+public:
+	std::string longestCommonPrefix(std::vector<std::string>& strs) 
+	{
+		std::string str;
+		size_t maxx = 0;
+
+		for (size_t i = 0; i < strs.size(); i++)
+		{
+			maxx = std::max(maxx, strs[i].size());
+		}
+		for (int i = 0; i < maxx; i++)
+		{
+			bool temp = true;
+
+			for (int j = 1; j < strs.size(); j++)
+			{
+				if (strs[j - 1][i] != strs[j][i])
+				{
+					return str;
+				}
+			}
+			str += strs[0][i];
+		}
+		return str;
+	}
+};
+// 14
+
+
+// leetcode ------------------------------
+
+
+
+
 
 int main()
 {
@@ -383,7 +481,9 @@ int main()
 	}
 
 	std::cout << count << '\n';*/
-
+	std::vector<std::string> ss = { "flower","flow","flight" };
+	Solution14 sol;
+	sol.longestCommonPrefix(ss);
 
 	return 0;
 }
