@@ -111,6 +111,87 @@ public:
 
 
 
+
+// 3. Longest Substring Without Repeating Characters
+class Solution3 
+{
+public:
+	int lengthOfLongestSubstring(std::string s)
+	{
+		int store[256] = { 0 };
+		int left = 0;
+		int right = 0;
+		int ans = 0;
+
+		while (right < s.length())
+		{
+			store[s[right]]++; 
+
+			while (store[s[right]] > 1)
+			{
+				store[s[left]]--;
+				left++;
+			}
+
+			ans = std::max(ans, right - left + 1);
+			right++;       
+		}
+		return ans;
+	}
+};
+// 3
+
+
+
+// 5. Longest Palindromic Substring
+class Solution5
+{
+public:
+	bool isPal(std::string temp)
+	{
+		for (size_t i = 0; i < temp.size() / 2; i++)
+		{
+			if (temp[i] != temp[temp.size() - i - 1])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	std::string longestPalindrome(std::string s)
+	{
+		if (s.size() == 1)
+		{
+			return s;
+		}
+		std::string ans;
+		ans.push_back(s[0]);
+		size_t maxx = 0;
+		for (size_t i = 0; i < s.size(); i++)
+		{
+			for (size_t j = i + 1; j < s.size(); j++)
+			{
+				auto tmp = s.substr(i, j - i + 1);
+				if (isPal(tmp))
+				{
+					if (tmp.size() > maxx)
+					{
+						ans = tmp;
+						maxx = tmp.size();
+					}
+				}
+			}
+		}
+		return ans;
+	}
+};
+// 5
+
+
+
+
+
+
 // 9. Palindrome Number
 class Solution9
 {
@@ -140,7 +221,6 @@ public:
 	}
 };
 // 9
-
 
 
 //14. Longest Common Prefix
@@ -173,6 +253,109 @@ public:
 	}
 };
 // 14
+
+
+// 20. Valid Parentheses
+class Solution20 
+{
+public:
+	bool isValid(std::string s)
+	{
+		if (s.size() & 1)
+		{
+			return false;
+		}
+
+		for (size_t i = 0; i < s.size(); i++)
+		{
+			switch (s[i])
+			{
+				case '(':
+				{
+					if (s.find(')', i) != std::string::npos && s.find(')', i) > s.find('(', i) && std::count(s.begin(), s.end(), '(') == std::count(s.begin(), s.end(), ')'))
+					{
+						if (s.find('(', i) + s.find(')', i) % 2 == 0)
+						{
+							return false;
+							break;
+						}
+					}
+					else
+					{
+						return false;
+						break;
+					}
+					break;
+				}
+				case '[':
+				{
+					if (s.find(']', i) != std::string::npos && s.find(']', i) > s.find('[', i) && std::count(s.begin(), s.end(), '[') == std::count(s.begin(), s.end(), ']'))
+					{
+						if (s.find('[', i) + s.find(']', i) % 2 == 0)
+						{
+							return false;
+							break;
+						}
+					}
+					else
+					{
+						return false;
+						break;
+					}
+					break;
+				}
+				case '{':
+				{
+					if (s.find('}', i) != std::string::npos && s.find('}', i) > s.find('{', i) && std::count(s.begin(), s.end(), '{') == std::count(s.begin(), s.end(), '}'))
+					{
+						if (s.find('{', i) + s.find('}', i) % 2 == 0)
+						{
+							return false;
+							break;
+						}
+					}
+					else
+					{
+						return false;
+						break;
+					}
+					break;
+				}
+				case ')':
+				{
+					if (s.find('(') == std::string::npos)
+					{
+						return false;
+					}
+					break;
+				}
+				case ']':
+				{
+					if (s.find('[') == std::string::npos)
+					{
+						return false;
+					}
+					break;
+				}
+				case '}':
+				{
+					if (s.find('{') == std::string::npos)
+					{
+						return false;
+					}
+					break;
+				}
+				default:
+					break;
+			}
+		}
+		return true;
+	}
+};
+// 20
+
+
+
 
 
 // leetcode ------------------------------
@@ -481,9 +664,10 @@ int main()
 	}
 
 	std::cout << count << '\n';*/
-	std::vector<std::string> ss = { "flower","flow","flight" };
-	Solution14 sol;
-	sol.longestCommonPrefix(ss);
+	
+
+	Solution5 q;
+	std::cout << q.longestPalindrome("bsnetpqmwhqjunkooftuosgkmkxpmvuehtlpwpktltwlvpdaycnhewdbdrhluyjldecezujgxixehsmjjuyerpllrvzqskizkulqzowzfvqcdsllvgupndbaiuzihcxklvxbodpnrymwobhlvllybdlfabfvnizjpriapuzszdhohfgezayokrivbgbgingspoxsridokhwekawchjdcpylvefubulvxneuizglrjktfcdirwnpqztdpsicslzaeiaibrepifxpxfkczwoumkkuaqkbjhxvasxflmrctponwwenvmtdaqaavubyrzbqjbjxpejmucwunanxwpomqyondyjuzxmzpevxqmbkrwcpdiiph");
 
 	return 0;
 }
