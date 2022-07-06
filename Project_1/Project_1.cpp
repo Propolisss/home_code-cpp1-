@@ -113,7 +113,7 @@ public:
 
 
 // 3. Longest Substring Without Repeating Characters
-class Solution3 
+class Solution3
 {
 public:
 	int lengthOfLongestSubstring(std::string s)
@@ -125,7 +125,7 @@ public:
 
 		while (right < s.length())
 		{
-			store[s[right]]++; 
+			store[s[right]]++;
 
 			while (store[s[right]] > 1)
 			{
@@ -134,7 +134,7 @@ public:
 			}
 
 			ans = std::max(ans, right - left + 1);
-			right++;       
+			right++;
 		}
 		return ans;
 	}
@@ -196,7 +196,7 @@ public:
 class Solution9
 {
 public:
-	bool isPalindrome(int x) 
+	bool isPalindrome(int x)
 	{
 		if (x < 0)
 		{
@@ -227,7 +227,7 @@ public:
 class Solution14
 {
 public:
-	std::string longestCommonPrefix(std::vector<std::string>& strs) 
+	std::string longestCommonPrefix(std::vector<std::string>& strs)
 	{
 		std::string str;
 		size_t maxx = 0;
@@ -256,7 +256,7 @@ public:
 
 
 // 20. Valid Parentheses
-class Solution20 
+class Solution20
 {
 public:
 	bool isValid(std::string s)
@@ -270,83 +270,83 @@ public:
 		{
 			switch (s[i])
 			{
-				case '(':
+			case '(':
+			{
+				if (s.find(')', i) != std::string::npos && s.find(')', i) > s.find('(', i) && std::count(s.begin(), s.end(), '(') == std::count(s.begin(), s.end(), ')'))
 				{
-					if (s.find(')', i) != std::string::npos && s.find(')', i) > s.find('(', i) && std::count(s.begin(), s.end(), '(') == std::count(s.begin(), s.end(), ')'))
-					{
-						if (s.find('(', i) + s.find(')', i) % 2 == 0)
-						{
-							return false;
-							break;
-						}
-					}
-					else
+					if (s.find('(', i) + s.find(')', i) % 2 == 0)
 					{
 						return false;
 						break;
 					}
+				}
+				else
+				{
+					return false;
 					break;
 				}
-				case '[':
+				break;
+			}
+			case '[':
+			{
+				if (s.find(']', i) != std::string::npos && s.find(']', i) > s.find('[', i) && std::count(s.begin(), s.end(), '[') == std::count(s.begin(), s.end(), ']'))
 				{
-					if (s.find(']', i) != std::string::npos && s.find(']', i) > s.find('[', i) && std::count(s.begin(), s.end(), '[') == std::count(s.begin(), s.end(), ']'))
-					{
-						if (s.find('[', i) + s.find(']', i) % 2 == 0)
-						{
-							return false;
-							break;
-						}
-					}
-					else
+					if (s.find('[', i) + s.find(']', i) % 2 == 0)
 					{
 						return false;
 						break;
 					}
+				}
+				else
+				{
+					return false;
 					break;
 				}
-				case '{':
+				break;
+			}
+			case '{':
+			{
+				if (s.find('}', i) != std::string::npos && s.find('}', i) > s.find('{', i) && std::count(s.begin(), s.end(), '{') == std::count(s.begin(), s.end(), '}'))
 				{
-					if (s.find('}', i) != std::string::npos && s.find('}', i) > s.find('{', i) && std::count(s.begin(), s.end(), '{') == std::count(s.begin(), s.end(), '}'))
-					{
-						if (s.find('{', i) + s.find('}', i) % 2 == 0)
-						{
-							return false;
-							break;
-						}
-					}
-					else
+					if (s.find('{', i) + s.find('}', i) % 2 == 0)
 					{
 						return false;
 						break;
 					}
-					break;
 				}
-				case ')':
+				else
 				{
-					if (s.find('(') == std::string::npos)
-					{
-						return false;
-					}
+					return false;
 					break;
 				}
-				case ']':
+				break;
+			}
+			case ')':
+			{
+				if (s.find('(') == std::string::npos)
 				{
-					if (s.find('[') == std::string::npos)
-					{
-						return false;
-					}
-					break;
+					return false;
 				}
-				case '}':
+				break;
+			}
+			case ']':
+			{
+				if (s.find('[') == std::string::npos)
 				{
-					if (s.find('{') == std::string::npos)
-					{
-						return false;
-					}
-					break;
+					return false;
 				}
-				default:
-					break;
+				break;
+			}
+			case '}':
+			{
+				if (s.find('{') == std::string::npos)
+				{
+					return false;
+				}
+				break;
+			}
+			default:
+				break;
 			}
 		}
 		return true;
@@ -356,6 +356,28 @@ public:
 
 
 
+
+// 27. Remove Element
+class Solution27
+{
+public:
+	int removeElement(std::vector<int>& nums, int val)
+	{
+		int count = std::count(nums.begin(), nums.end(), val);
+		for (size_t i = 0; i < nums.size() - 1; i++)
+		{
+			for (size_t j = 0; j < nums.size() - 1; j++)
+			{
+				if (nums[j] == val)
+				{
+					std::swap(nums[j], nums[j + 1]);
+				}
+			}
+		}
+		return nums.size() - count;
+	}
+};
+// 27
 
 
 // leetcode ------------------------------
@@ -368,7 +390,7 @@ int main()
 {
 	// (№ 5288) (М. Фирсов) - 25 егэ
 	/*
-	
+
 	for (int i = 100000; i < 500000 + 1; i++)
 	{
 		auto dels = div_simple(i);
@@ -397,7 +419,7 @@ int main()
 					std::advance(tmp_it1, 1);
 				}
 			}
-			
+
 		}
 
 		if (flag)
@@ -416,7 +438,7 @@ int main()
 		}
 		std::cout << i << ' ' << div_simple(fac(i)).size() << '\n';
 	}
-	*/ 
+	*/
 	// (№ 5021) (И.Женецкий) - 25 егэ
 	/*
 	std::vector<int64_t> nums_of_2;
@@ -440,7 +462,7 @@ int main()
 			}
 		}
 	}
-	
+
 	*/
 	// (№ 4986) (М. Фирсов) - 25 егэ
 	/*std::vector<uint64_t> nums;
@@ -611,7 +633,7 @@ int main()
 			{
 				std::cout << i << ' ' << f << '\n';
 			}
-		} 
+		}
 	}*/
 	// (№ 4280) (А. Кабанов) - 27 егэ (не оптимально, но считает быстро)
 	/*int n;
@@ -664,10 +686,10 @@ int main()
 	}
 
 	std::cout << count << '\n';*/
-	
 
-	Solution5 q;
-	std::cout << q.longestPalindrome("bsnetpqmwhqjunkooftuosgkmkxpmvuehtlpwpktltwlvpdaycnhewdbdrhluyjldecezujgxixehsmjjuyerpllrvzqskizkulqzowzfvqcdsllvgupndbaiuzihcxklvxbodpnrymwobhlvllybdlfabfvnizjpriapuzszdhohfgezayokrivbgbgingspoxsridokhwekawchjdcpylvefubulvxneuizglrjktfcdirwnpqztdpsicslzaeiaibrepifxpxfkczwoumkkuaqkbjhxvasxflmrctponwwenvmtdaqaavubyrzbqjbjxpejmucwunanxwpomqyondyjuzxmzpevxqmbkrwcpdiiph");
 
+	std::vector<int> ans = { 2, 2, 3 };
+	Solution27 q;
+	q.removeElement(ans, 2);
 	return 0;
 }
