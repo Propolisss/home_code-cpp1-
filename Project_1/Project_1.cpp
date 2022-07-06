@@ -110,8 +110,6 @@ public:
 // 1
 
 
-
-
 // 3. Longest Substring Without Repeating Characters
 class Solution3
 {
@@ -140,7 +138,6 @@ public:
 	}
 };
 // 3
-
 
 
 // 5. Longest Palindromic Substring
@@ -186,10 +183,6 @@ public:
 	}
 };
 // 5
-
-
-
-
 
 
 // 9. Palindrome Number
@@ -355,8 +348,6 @@ public:
 // 20
 
 
-
-
 // 27. Remove Element
 class Solution27
 {
@@ -379,6 +370,38 @@ public:
 };
 // 27
 
+
+// 66. Plus One
+class Solution66
+{
+public:
+	std::vector<int> plusOne(std::vector<int>& digits)
+	{
+		if (digits.empty())
+		{
+			return digits;
+		}
+		for (int i = digits.size() - 1; i > -1; i--)
+		{
+			if (digits[i] + 1 < 10)
+			{
+				digits[i]++;
+				return digits;
+			}
+			else
+			{
+				digits[i] = 0;
+			}
+		}
+		if (digits[0] == 0)
+		{
+			auto iter = digits.begin();
+			digits.emplace(iter, 1);
+		}
+		return digits;
+	}
+};
+// 66
 
 // leetcode ------------------------------
 
@@ -688,8 +711,10 @@ int main()
 	std::cout << count << '\n';*/
 
 
-	std::vector<int> ans = { 2, 2, 3 };
-	Solution27 q;
-	q.removeElement(ans, 2);
+	std::vector<int> ans = { 9 };
+	Solution66 q;
+	q.plusOne(ans);
+
+
 	return 0;
 }
