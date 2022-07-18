@@ -7,7 +7,6 @@
 #include <algorithm>
 #include <fstream>
 
-
 bool simple(uint64_t n)
 {
 	for (auto i = 2; i < std::floor(sqrt(n)) + 1; i++)
@@ -254,93 +253,49 @@ class Solution20
 public:
 	bool isValid(std::string s)
 	{
-		if (s.size() & 1)
+		int16_t temp_count = 0;
+		int16_t count = 0;
+		std::vector<bool> buffer {};
+		buffer.reserve(20);
+		int16_t _s = s.size();
+		for (int16_t i = 0, j = _s - 1; i < _s; i++, j--)
+		{
+			if (s[i] != ')' && s[i] != ']' && s[i] != '}')
+			{
+				buffer.push_back(false);
+				buffer.push_back(false);
+				count += 2;
+			}
+			else
+			{
+				if (buffer.empty())
+				{
+					return false;
+				}
+				temp_count = i - 1;
+				while (buffer[temp_count] != false)
+				{
+					temp_count--;
+					if (temp_count == -1)
+					{
+						return false;
+					}
+				}
+				if (char(s[temp_count]) == char(s[i] - 1) || char(s[temp_count]) == char(s[i] - 2))
+				{
+					buffer[temp_count] = true;
+					buffer[i] = true;
+					count -= 2;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+		if (count != 0)
 		{
 			return false;
-		}
-
-		for (size_t i = 0; i < s.size(); i++)
-		{
-			switch (s[i])
-			{
-			case '(':
-			{
-				if (s.find(')', i) != std::string::npos && s.find(')', i) > s.find('(', i) && std::count(s.begin(), s.end(), '(') == std::count(s.begin(), s.end(), ')'))
-				{
-					if (s.find('(', i) + s.find(')', i) % 2 == 0)
-					{
-						return false;
-						break;
-					}
-				}
-				else
-				{
-					return false;
-					break;
-				}
-				break;
-			}
-			case '[':
-			{
-				if (s.find(']', i) != std::string::npos && s.find(']', i) > s.find('[', i) && std::count(s.begin(), s.end(), '[') == std::count(s.begin(), s.end(), ']'))
-				{
-					if (s.find('[', i) + s.find(']', i) % 2 == 0)
-					{
-						return false;
-						break;
-					}
-				}
-				else
-				{
-					return false;
-					break;
-				}
-				break;
-			}
-			case '{':
-			{
-				if (s.find('}', i) != std::string::npos && s.find('}', i) > s.find('{', i) && std::count(s.begin(), s.end(), '{') == std::count(s.begin(), s.end(), '}'))
-				{
-					if (s.find('{', i) + s.find('}', i) % 2 == 0)
-					{
-						return false;
-						break;
-					}
-				}
-				else
-				{
-					return false;
-					break;
-				}
-				break;
-			}
-			case ')':
-			{
-				if (s.find('(') == std::string::npos)
-				{
-					return false;
-				}
-				break;
-			}
-			case ']':
-			{
-				if (s.find('[') == std::string::npos)
-				{
-					return false;
-				}
-				break;
-			}
-			case '}':
-			{
-				if (s.find('{') == std::string::npos)
-				{
-					return false;
-				}
-				break;
-			}
-			default:
-				break;
-			}
 		}
 		return true;
 	}
@@ -711,10 +666,8 @@ int main()
 	std::cout << count << '\n';*/
 
 
-	std::vector<int> ans = { 9 };
-	Solution66 q;
-	q.plusOne(ans);
-
+	Solution20 c;
+	c.isValid("()");
 
 	return 0;
 }
