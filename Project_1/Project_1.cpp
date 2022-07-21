@@ -361,6 +361,25 @@ public:
 // leetcode ------------------------------
 
 
+// (№ 4970) - 16 задание егэ
+/*
+template <class T>
+T f(T n)
+{
+	if (n == 0)
+	{
+		return 8;
+	}
+	else if (n > 0 && n % 3 == 0)
+	{
+		return 5 + f(n / 3);
+	}
+	else
+	{
+		return f(n / 3);
+	}
+}
+*/
 
 
 
@@ -664,10 +683,27 @@ int main()
 	}
 
 	std::cout << count << '\n';*/
+	// (№ 4970) - 16 задание егэ
+	/*uint64_t count = 0;
+	for (size_t i = 1; i < 100000000; i++)
+	{
+		if (i % 1000000 == 0)
+		{
+			std::cout << i << '\n';
+		}
+		try
+		{
+			if (f(i) == 18)
+			{
+				count++;
+			}
+		}
+		catch (...)
+		{
 
+		}
+	}*/
 
-	Solution20 c;
-	c.isValid("()");
 
 	return 0;
 }
