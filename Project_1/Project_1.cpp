@@ -6,6 +6,9 @@
 #include <cmath>
 #include <algorithm>
 #include <fstream>
+#include <stack>
+
+
 
 bool simple(uint64_t n)
 {
@@ -301,6 +304,42 @@ public:
 	}
 };
 // 20
+
+
+// 20. Valid Parentheses ( 2 version )
+
+class Solution20_2
+{
+public:
+	bool isValid(std::string s)
+	{
+		std::stack<char> stack;
+
+
+		for (size_t i = 0; i < s.size(); i++)
+		{
+			if (s[i] == '(' || s[i] == '[' || s[i] == '{')
+			{
+				stack.push(s[i]);
+			}
+			else
+			{
+				if (stack.empty() || (s[i] == ')' && stack.top() != '(') || (s[i] == ']' && stack.top() != '[') || (s[i] == '}' && stack.top() != '{'))
+				{
+					return false;
+				}
+				else
+				{
+					stack.pop();
+				}
+			} 
+		}
+		return stack.empty();
+	}
+};
+
+// 20
+
 
 
 // 27. Remove Element
@@ -704,6 +743,8 @@ int main()
 		}
 	}*/
 
+	Solution20_2 cl;
+	cl.isValid("{[]}");
 
 	return 0;
 }
