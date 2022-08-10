@@ -9,7 +9,6 @@
 #include <stack>
 
 
-
 bool simple(uint64_t n)
 {
 	for (auto i = 2; i < std::floor(sqrt(n)) + 1; i++)
@@ -111,6 +110,62 @@ public:
 };
 // 1
 
+
+// 2. Add Two Numbers
+class Solution2 
+{
+public:
+	struct ListNode
+	{
+		int val;
+		ListNode* next;
+		ListNode() : val(0), next(nullptr) {}
+		ListNode(int x) : val(x), next(nullptr) {}
+		ListNode(int x, ListNode* next) : val(x), next(next) {}
+	};
+
+
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) 
+	{
+		int temp_counter = 0;
+		ListNode* head = new ListNode();
+		ListNode* buff = new ListNode();
+
+		while (l1 || l2)
+		{
+			buff = (buff->next) ? buff->next : head;
+			int temp_value = ((l1) ? l1->val : 0) + ((l2) ? l2->val : 0);
+			buff->val += temp_value;
+
+			if (temp_counter)
+			{
+				temp_value += temp_counter;
+				temp_counter = 0;
+			}
+
+			if (temp_value >= 10)
+			{
+				buff->val %= 10;
+				temp_counter = temp_value / 10;
+			}
+			
+
+			buff->next = new ListNode();
+
+			if (l1) l1 = l1->next;
+			if (l2) l2 = l2->next;
+			buff->next->val += temp_counter;
+		}
+		
+		if (!buff->next->val)
+		{
+			delete buff->next;
+			buff->next = nullptr;
+		}
+		return head;
+	}
+};
+// 2
 
 // 3. Longest Substring Without Repeating Characters
 class Solution3
@@ -258,7 +313,7 @@ public:
 	{
 		int16_t temp_count = 0;
 		int16_t count = 0;
-		std::vector<bool> buffer {};
+		std::vector<bool> buffer{};
 		buffer.reserve(20);
 		int16_t _s = s.size();
 		for (int16_t i = 0, j = _s - 1; i < _s; i++, j--)
@@ -307,7 +362,6 @@ public:
 
 
 // 20. Valid Parentheses ( 2 version )
-
 class Solution20_2
 {
 public:
@@ -332,15 +386,60 @@ public:
 				{
 					stack.pop();
 				}
-			} 
+			}
 		}
 		return stack.empty();
 	}
 };
-
 // 20
 
 
+
+// 23. Merge k Sorted Lists ( very simple solution with stl, mb will do w/o later )
+class Solution23
+{
+public:
+	struct ListNode
+	{
+		int val;
+		ListNode* next;
+		ListNode() : val(0), next(nullptr) {}
+		ListNode(int x) : val(x), next(nullptr) {}
+		ListNode(int x, ListNode* next) : val(x), next(next) {}
+	};
+
+	ListNode* mergeKLists(std::vector<ListNode*>& lists)
+	{
+		std::multiset<int> ans;
+		ListNode* head = new ListNode();
+		ListNode* temp = new ListNode();
+		ListNode* empty = nullptr;
+		for (size_t i = 0; i < lists.size(); i++)
+		{
+			while (lists[i])
+			{
+				ans.insert(lists[i]->val);
+				lists[i] = lists[i]->next;
+			}
+		}
+
+		if (ans.empty())
+		{
+			return empty;
+		}
+
+		for (auto& i : ans)
+		{
+			temp = (temp->next) ? temp->next : head;
+			temp->val = i;
+			temp->next = new ListNode();
+		}
+		delete temp->next;
+		temp->next = nullptr;
+		return head;
+	}
+};
+// 23
 
 // 27. Remove Element
 class Solution27
@@ -743,8 +842,15 @@ int main()
 		}
 	}*/
 
-	Solution20_2 cl;
-	cl.isValid("{[]}");
+	//ListNode* ll1 = new ListNode(0, new ListNode(8, new ListNode(6, new ListNode(5, new ListNode(6, new ListNode(8, new ListNode(3, new ListNode(5, new ListNode(7, nullptr)))))))));
+	//ListNode* ll2 = new ListNode(6, new ListNode(7, new ListNode(8, new ListNode(0, new ListNode(8, new ListNode(5, new ListNode(8, new ListNode(9, new ListNode(7, nullptr)))))))));
+
+
+	//ListNode* ll1 = new ListNode(2, new ListNode(4, new ListNode(3, nullptr)));
+	//ListNode* ll2 = new ListNode(5, new ListNode(6, new ListNode(4, nullptr)));
+	Solution2 q;
+
+	q.addTwoNumbers(ll1, ll2);
 
 	return 0;
 }
