@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <fstream>
 #include <stack>
+#include <array>
 
 
 bool simple(uint64_t n)
@@ -112,7 +113,7 @@ public:
 
 
 // 2. Add Two Numbers
-class Solution2 
+class Solution2
 {
 public:
 	struct ListNode
@@ -125,7 +126,7 @@ public:
 	};
 
 
-	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) 
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
 	{
 		int temp_counter = 0;
 		ListNode* head = new ListNode();
@@ -148,7 +149,7 @@ public:
 				buff->val %= 10;
 				temp_counter = temp_value / 10;
 			}
-			
+
 
 			buff->next = new ListNode();
 
@@ -156,7 +157,7 @@ public:
 			if (l2) l2 = l2->next;
 			buff->next->val += temp_counter;
 		}
-		
+
 		if (!buff->next->val)
 		{
 			delete buff->next;
@@ -240,6 +241,35 @@ public:
 	}
 };
 // 5
+
+// 6. Zigzag Conversion
+class Solution6
+{
+public:
+	std::string convert(std::string s, int numRows)
+	{
+		if (numRows == 1) return s;
+		std::vector<std::string> strs(numRows);
+		std::string ans;
+		bool flag = true;
+		int counter = 0;
+		for (size_t i = 0; i < s.size(); i++)
+		{
+			if (flag) strs[counter++] += s[i];
+			if (!flag) strs[counter--] += s[i];
+			if (counter == numRows - 1 || counter == 0) flag = !flag;
+		}
+
+		for (auto& i : strs)
+		{
+			ans += i;
+		}
+		return ans;
+	}
+};
+// 6
+
+
 
 
 // 9. Palindrome Number
@@ -848,9 +878,10 @@ int main()
 
 	//ListNode* ll1 = new ListNode(2, new ListNode(4, new ListNode(3, nullptr)));
 	//ListNode* ll2 = new ListNode(5, new ListNode(6, new ListNode(4, nullptr)));
-	Solution2 q;
+	Solution6 q;
 
-	q.addTwoNumbers(ll1, ll2);
+
+	q.convert("ABCD", 1);
 
 	return 0;
 }
