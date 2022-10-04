@@ -549,7 +549,37 @@ T f(T n)
 }
 */
 
+// 04.10.2022 preparation for the teachers day
+/*
+bool is_true1(std::string st)
+{
+	for (size_t i = 1; i < st.size(); i++)
+	{
+		if (st[i - 1] == st[i])
+		{
+			return false;
+		}
+	}
 
+	return true;
+}
+bool is_true2(std::string st)
+{
+	for (size_t i = 1; i < st.size(); i++)
+	{
+		if (st[i] == 'S')
+		{
+			if (st[i - 1] == st[i + 1])
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+
+*/
 
 int main()
 {
@@ -872,16 +902,130 @@ int main()
 		}
 	}*/
 
-	//ListNode* ll1 = new ListNode(0, new ListNode(8, new ListNode(6, new ListNode(5, new ListNode(6, new ListNode(8, new ListNode(3, new ListNode(5, new ListNode(7, nullptr)))))))));
-	//ListNode* ll2 = new ListNode(6, new ListNode(7, new ListNode(8, new ListNode(0, new ListNode(8, new ListNode(5, new ListNode(8, new ListNode(9, new ListNode(7, nullptr)))))))));
-
-
-	//ListNode* ll1 = new ListNode(2, new ListNode(4, new ListNode(3, nullptr)));
-	//ListNode* ll2 = new ListNode(5, new ListNode(6, new ListNode(4, nullptr)));
+	
 	Solution6 q;
-
-
 	q.convert("ABCD", 1);
+
+
+	// 04.10.2022 preparation for the teachers day
+	/*std::string word = "CONST";
+	std::vector<std::string> s1 {};
+	std::vector<std::string> s2 {};
+	std::vector<std::string> s3 {};
+	std::string temp_st = "";
+	size_t count = 0;
+
+	for (size_t i1 = 0; i1 < 5; i1++)
+	{
+		for (size_t i2 = 0; i2 < 5; i2++)
+		{
+			for (size_t i3 = 0; i3 < 5; i3++)
+			{
+				for (size_t i4 = 0; i4 < 5; i4++)
+				{
+					for (size_t i5 = 0; i5 < 5; i5++)
+					{
+						temp_st.push_back(word[i1]);
+						temp_st.push_back(word[i2]);
+						temp_st.push_back(word[i3]);
+						temp_st.push_back(word[i4]);
+						temp_st.push_back(word[i5]);
+						s1.push_back(temp_st);
+						s2.push_back(temp_st);
+						s3.push_back(temp_st);
+						temp_st.clear();
+					}
+				}
+			}
+		}
+	}
+	
+
+	temp_st.clear();
+	for (size_t i1 = 0; i1 < s1.size(); i1++)
+	{
+		std::cout << i1 << ' ' << count << '\n';
+		for (size_t i2 = 0; i2 < s2.size(); i2++)
+		{
+			for (size_t i3 = 0; i3 < s3.size(); i3++)
+			{
+				for (size_t j = 0; j < word.size(); j++)
+				{
+					temp_st.append(s1[i1]);
+					temp_st.append(s2[i2]);
+					temp_st.append(s3[i3]);
+					temp_st.push_back(word[j]);
+					if ((temp_st[0] != 'S') && (temp_st[15] != 'S') && (is_true1(temp_st)) && (is_true2(temp_st)))
+					{
+						count++;
+					}
+					temp_st.clear();
+				}
+			}
+		}
+	}
+
+	std::cout << count << '\n';*/
+	/*std::vector<std::string> s1{};
+	std::vector<std::string> s2{};
+	std::vector<std::string> s3{};
+	std::vector<std::string> s4{};
+	std::string word = "ГОЛ";
+	std::string temp_st = "";
+
+	for (size_t i1 = 0; i1 < 3; i1++)
+	{
+		for (size_t i2 = 0; i2 < 3; i2++)
+		{
+			for (size_t i3 = 0; i3 < 3; i3++)
+			{
+				for (size_t i4 = 0; i4 < 3; i4++)
+				{
+					for (size_t i5 = 0; i5 < 3; i5++)
+					{
+						temp_st.push_back(word[i1]);
+						temp_st.push_back(word[i2]);
+						temp_st.push_back(word[i3]);
+						temp_st.push_back(word[i4]);
+						temp_st.push_back(word[i5]);
+						s1.push_back(temp_st);
+						s2.push_back(temp_st);
+						s3.push_back(temp_st);
+						s4.push_back(temp_st);
+						temp_st.clear();
+					}
+				}
+			}
+		}
+	}
+
+
+	size_t count = 0;
+
+	for (size_t i = 0; i < s1.size(); i++)
+	{
+		std::cout << i << '\n';
+		for (size_t j = 0; j < s2.size(); j++)
+		{
+			for (size_t k = 0; k < s3.size(); k++)
+			{
+				for (size_t l = 0; l < s4.size(); l++)
+				{
+					temp_st.append(s1[i]);
+					temp_st.append(s2[j]);
+					temp_st.append(s3[k]);
+					temp_st.append(s4[l]);
+					if ((temp_st[0] != 'Г' && temp_st[19] != 'Г') && (temp_st.find("ОГО") == std::string::npos) && (temp_st.find("ЛГЛ") == std::string::npos) && (temp_st.find("ГГ") == std::string::npos) && (temp_st.find("ОО") == std::string::npos) && (temp_st.find("ЛЛ") == std::string::npos))
+					{
+						count++;
+					}
+					temp_st.clear();
+				}
+			}
+		}
+	}
+
+	std::cout << count << '\n';*/
 
 	return 0;
 }
